@@ -138,43 +138,54 @@ class _GestionProductosState extends State<GestionProductos> {
                     _editandoId == null ? 'Agregar Artículo' : 'Editar Artículo',
                     style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 14),
+                  // Fila 1: Nombre y Departamento
                   Row(
                     children: [
                       Expanded(child: _campo(_nombreCtrl, 'Nombre', Icons.inventory_2)),
-                      const SizedBox(width: 10),
-                      Expanded(child: _campo(_precioCtrl, 'Precio \$', Icons.attach_money, tipo: TextInputType.number)),
-                      const SizedBox(width: 10),
-                      Expanded(child: _campo(_stockCtrl, 'Stock', Icons.production_quantity_limits, tipo: TextInputType.number)),
-                      const SizedBox(width: 10),
+                      const SizedBox(width: 12),
                       Expanded(child: _campo(_deptCtrl, 'Departamento', Icons.category)),
-                      const SizedBox(width: 10),
-                      Expanded(child: _campo(_descCtrl, 'Descuento %', Icons.percent, tipo: TextInputType.number)),
                     ],
                   ),
-
                   const SizedBox(height: 12),
+                  // Fila 2: Precio, Stock, Descuento
                   Row(
                     children: [
-                      ElevatedButton.icon(
-                        onPressed: _guardar,
-                        icon: Icon(_editandoId == null ? Icons.add : Icons.save, size: 18),
-                        label: Text(_editandoId == null ? 'Agregar' : 'Actualizar'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFF7C02F),
-                          foregroundColor: Colors.black87,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                      Expanded(child: _campo(_precioCtrl, 'Precio \$', Icons.attach_money, tipo: TextInputType.number)),
+                      const SizedBox(width: 12),
+                      Expanded(child: _campo(_stockCtrl, 'Stock', Icons.production_quantity_limits, tipo: TextInputType.number)),
+                      const SizedBox(width: 12),
+                      Expanded(child: _campo(_descCtrl, 'Desc. %', Icons.percent, tipo: TextInputType.number)),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          onPressed: _guardar,
+                          icon: Icon(_editandoId == null ? Icons.add : Icons.save, size: 18),
+                          label: Text(_editandoId == null ? 'Agregar' : 'Actualizar'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFF7C02F),
+                            foregroundColor: Colors.black87,
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                          ),
                         ),
                       ),
                       if (_editandoId != null) ...[
                         const SizedBox(width: 10),
-                        OutlinedButton.icon(
-                          onPressed: _limpiar,
-                          icon: const Icon(Icons.cancel_outlined, size: 18),
-                          label: const Text('Cancelar'),
-                          style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: Colors.grey),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            onPressed: _limpiar,
+                            icon: const Icon(Icons.cancel_outlined, size: 18),
+                            label: const Text('Cancelar'),
+                            style: OutlinedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              side: const BorderSide(color: Colors.grey),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                            ),
                           ),
                         ),
                       ],
@@ -297,15 +308,19 @@ class _GestionProductosState extends State<GestionProductos> {
     return TextField(
       controller: ctrl,
       keyboardType: tipo,
+      style: const TextStyle(fontSize: 14),
       decoration: InputDecoration(
         labelText: label,
-        isDense: true,
+        labelStyle: const TextStyle(fontSize: 13),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         prefixIcon: Icon(icono, size: 20, color: const Color(0xFFF7C02F)),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(16),
           borderSide: const BorderSide(color: Color(0xFFF7C02F), width: 2),
         ),
+        filled: true,
+        fillColor: Colors.grey.shade50,
       ),
     );
   }

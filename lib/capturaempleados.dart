@@ -147,52 +147,63 @@ class _CapturaEmpleadosState extends State<CapturaEmpleados> {
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  const SizedBox(height: 12),
-                  // Fila 1: Nombre, Apellido, Puesto
+                  const SizedBox(height: 14),
+                  // Fila 1: Nombre y Apellido
                   Row(
                     children: [
                       Expanded(child: _campo(_nombreCtrl, 'Nombre', Icons.person)),
-                      const SizedBox(width: 10),
+                      const SizedBox(width: 12),
                       Expanded(child: _campo(_apellidoCtrl, 'Apellido', Icons.person_outline)),
-                      const SizedBox(width: 10),
-                      Expanded(child: _campo(_puestoCtrl, 'Puesto', Icons.work)),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  // Fila 2: Dirección, Edad, Número
-                  Row(
-                    children: [
-                      Expanded(child: _campo(_direccionCtrl, 'Dirección', Icons.home)),
-                      const SizedBox(width: 10),
-                      Expanded(child: _campo(_edadCtrl, 'Edad', Icons.cake, tipo: TextInputType.number)),
-                      const SizedBox(width: 10),
-                      Expanded(child: _campo(_numeroCtrl, 'Teléfono', Icons.phone, tipo: TextInputType.number)),
                     ],
                   ),
                   const SizedBox(height: 12),
+                  // Fila 2: Puesto y Edad
                   Row(
                     children: [
-                      ElevatedButton.icon(
-                        onPressed: _guardar,
-                        icon: Icon(_editandoId == null ? Icons.add : Icons.save, size: 18),
-                        label: Text(_editandoId == null ? 'Agregar' : 'Actualizar'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF4CAF50),
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
+                      Expanded(child: _campo(_puestoCtrl, 'Puesto', Icons.work)),
+                      const SizedBox(width: 12),
+                      Expanded(child: _campo(_edadCtrl, 'Edad', Icons.cake, tipo: TextInputType.number)),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  // Fila 3: Dirección y Teléfono
+                  Row(
+                    children: [
+                      Expanded(child: _campo(_direccionCtrl, 'Dirección', Icons.home)),
+                      const SizedBox(width: 12),
+                      Expanded(child: _campo(_numeroCtrl, 'Teléfono', Icons.phone, tipo: TextInputType.phone)),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          onPressed: _guardar,
+                          icon: Icon(_editandoId == null ? Icons.add : Icons.save, size: 18),
+                          label: Text(_editandoId == null ? 'Agregar' : 'Actualizar'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF4CAF50),
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),
+                          ),
                         ),
                       ),
                       if (_editandoId != null) ...[
                         const SizedBox(width: 10),
-                        OutlinedButton.icon(
-                          onPressed: _limpiar,
-                          icon: const Icon(Icons.cancel_outlined, size: 18),
-                          label: const Text('Cancelar'),
-                          style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: Colors.grey),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30)),
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            onPressed: _limpiar,
+                            icon: const Icon(Icons.cancel_outlined, size: 18),
+                            label: const Text('Cancelar'),
+                            style: OutlinedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              side: const BorderSide(color: Colors.grey),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30)),
+                            ),
                           ),
                         ),
                       ],
@@ -314,15 +325,19 @@ class _CapturaEmpleadosState extends State<CapturaEmpleados> {
     return TextField(
       controller: ctrl,
       keyboardType: tipo,
+      style: const TextStyle(fontSize: 14),
       decoration: InputDecoration(
         labelText: label,
-        isDense: true,
+        labelStyle: const TextStyle(fontSize: 13),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         prefixIcon: Icon(icono, size: 20, color: const Color(0xFF4CAF50)),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(16),
           borderSide: const BorderSide(color: Color(0xFF4CAF50), width: 2),
         ),
+        filled: true,
+        fillColor: Colors.grey.shade50,
       ),
     );
   }

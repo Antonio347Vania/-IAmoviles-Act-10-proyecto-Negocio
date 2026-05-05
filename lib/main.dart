@@ -6,17 +6,7 @@ import 'inicio.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: const FirebaseOptions(
-      apiKey: 'AIzaSyAReAiTm7nGUDlQfVNlFpy5fJPto1YpS3k',
-      authDomain: 'dbsoriana.firebaseapp.com',
-      projectId: 'dbsoriana',
-      storageBucket: 'dbsoriana.firebasestorage.app',
-      messagingSenderId: '721230522050',
-      appId: '1:721230522050:web:3627bd90b47bf0dc7ebd5b',
-      measurementId: 'G-B2RGBBEDYM',
-    ),
-  );
+  await Firebase.initializeApp();
   runApp(const AntigravityApp());
 }
 
